@@ -25,18 +25,35 @@ function waitForCompleteLoad() {
 
 function loadSavedSection() {
     const savedSection = localStorage.getItem('currentSection');
-    console.log('Sección guardada desde localStorage:', savedSection);
-    if (savedSection) {
-        document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
-        const section = document.querySelector(savedSection);
-        if (section) {
-            section.classList.add('active');
-            section.scrollIntoView({ behavior: 'auto', block: 'start' });
+    const defaultSection = '#pagina1'; // Cambia este ID si quieres otra sección por defecto
+
+    // Elegimos qué sección mostrar
+    const sectionToShow = savedSection && document.querySelector(savedSection)
+        ? savedSection
+        : defaultSection;
+
+    console.log('Sección que se intentará mostrar:', sectionToShow);
+
+    // Removemos clase "active" de todas las secciones
+    document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
+
+    const section = document.querySelector(sectionToShow);
+    if (section) {
+        section.classList.add('active');
+        section.scrollIntoView({ behavior: 'auto', block: 'start' });
+
+        // Si no había sección guardada, la guardamos ahora
+        if (!savedSection) {
+            localStorage.setItem('currentSection', sectionToShow);
+            console.log('Guardado por defecto:', sectionToShow);
         } else {
-            console.warn('Sección no encontrada:', savedSection);
+            console.log('Sección cargada desde localStorage:', savedSection);
         }
+    } else {
+        console.warn('⚠️ No se encontró la sección:', sectionToShow);
     }
 }
+
 
 // Usamos window.onload para asegurarnos de que todos los recursos estén completamente cargados
 window.onload = function () {

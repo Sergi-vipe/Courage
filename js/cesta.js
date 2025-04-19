@@ -18,7 +18,7 @@ function actualizarCarrito() {
 
     // Generar la lista de productos en el carrito
     carrito.forEach(item => {
-        console.log(item.imagen); // Verifica la URL de la imagen
+        console.log(item.imagen); // Asegúrate de que esto esté aquí dentro del forEach
         const li = document.createElement('li');
         li.innerHTML = `
             <div class="card-cesta">   
@@ -66,7 +66,13 @@ function agregarProducto(id, nombre, precio, imagen) {
     if (productoExistente) {
         productoExistente.cantidad += 1; // Si existe, sumar cantidad
     } else {
-        carrito.push({ id, nombre, precio, imagen, cantidad: 1 }); // Si no, agregarlo
+        carrito.push({ 
+            id, 
+            nombre, 
+            precio, 
+            imagen, 
+            cantidad: 1 
+        }); // Si no, agregarlo
     }
 
     // Actualizamos el carrito y guardamos en localStorage

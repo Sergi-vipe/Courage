@@ -1,0 +1,10 @@
+# Ignorar la carpeta node_modules
+node_modules/
+
+# Ignorar la carpeta de build o dist
+dist/
+
+# Ignorar archivos temporales de editores
+.vscode/
+
+parcel-cache/
